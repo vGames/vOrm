@@ -4,4 +4,4 @@
 
 ## License
 
-This module is licensed under [MIT License](raw/master/LICENSE)
+This module is licensed under [MIT License](LICENSE)
