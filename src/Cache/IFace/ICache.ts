@@ -14,5 +14,4 @@ export interface ICache {
     removeObject(key: Object): Object;
     clear():void;
     getSize():number;
-    
 }
