@@ -784,7 +784,7 @@ declare namespace FibJS {
          * @type {Readonly<string>}
          * @memberof Process
          */
-        version:Readonly<string>;
+        version: Readonly<string>;
 
         /**
          *返回 fibjs 及组件的版本信息
@@ -792,7 +792,7 @@ declare namespace FibJS {
          * @type {Readonly<Object>}
          * @memberof Process
          */
-        versions:Readonly<Object>;
+        versions: Readonly<Object>;
 
         /**
          *查询当前运行执行文件完整路径
@@ -808,7 +808,7 @@ declare namespace FibJS {
          * @type {string}
          * @memberof Process
          */
-        env:string;
+        env: string;
 
         /**
          * 查询当前 cpu 环境
@@ -816,12 +816,12 @@ declare namespace FibJS {
          * @type {keyof  'amd64'}
          * @memberof Process
          */
-        arch:keyof { 'amd64', 'arm', 'arm64', 'ia32'};
-        platform:keyof { 'darwin', 'freebsd', 'linux',"win32"};
-        stdin:any;
-        stdout:any;
-        stderr:any;
-        exitCode:Integer;
+        arch: keyof { 'amd64', 'arm', 'arm64', 'ia32' };
+        platform: keyof { 'darwin', 'freebsd', 'linux', "win32" };
+        stdin: any;
+        stdout: any;
+        stderr: any;
+        exitCode: Integer;
 
         addListener(event: "beforeExit", listener: BeforeExitListener): this;
         addListener(event: "exit", listener: BeforeExitListener): this;
@@ -6541,8 +6541,8 @@ declare module "fs" {
         isSocket(): boolean;
     }
 
-    interface File extends SeekableStream{
-            
+    interface File extends SeekableStream {
+
         /**
             * 
             * @brief 查询当前文件的访问权限，Windows 不支持此方法
@@ -6865,7 +6865,7 @@ declare module "fs" {
      * @async
      */
     export function openFile(fname: string, flags?: string/** = "r"*/): SeekableStream;
-    export function openFile(fname:string):File;
+    export function openFile(fname: string): File;
 
     /**
      * 
@@ -11680,5 +11680,1280 @@ declare module "net" {
         * 
         */
     export function isIPv6(ip?: string/** = ""*/): boolean;
+}
+//#endregion
+
+
+//#region
+declare module "xml" {
+
+    export class XmlNode {
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点的节点类型
+         * 
+         * 不同对象的 nodeType 会返回不同的值：
+         * - XmlElement: ELEMENT_NODE(1)
+         * - XmlAttr: ATTRIBUTE_NODE(2)
+         * - XmlText: TEXT_NODE(3)
+         * - XmlCDATASection: CDATA_SECTION_NODE(4)
+         * - XmlProcessingInstruction: PROCESSING_INSTRUCTION_NODE(7)
+         * - XmlComment: COMMENT_NODE(8)
+         * - XmlDocument: DOCUMENT_NODE(9)
+         * - XmlDocumentType: DOCUMENT_TYPE_NODE(10)
+         * 
+         * 
+         * @readonly
+         * @type Integer
+         */
+        nodeType: number
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点的名称，根据其类型
+         * 
+         * 不同对象的 nodeName 会返回不同的值：
+         * - XmlElement: element name
+         * - XmlAttr: 属性名称
+         * - XmlText: \#text
+         * - XmlCDATASection: \#cdata-section
+         * - XmlProcessingInstruction: 返回指定目标 target
+         * - XmlComment: \#comment
+         * - XmlDocument: \#document
+         * - XmlDocumentType: doctype 名称
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        nodeName: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点的名称，根据其类型
+         * 
+         * 不同对象的 nodeName 会返回不同的值：
+         * - XmlElement: null
+         * - XmlAttr: 属性的值
+         * - XmlText: 节点的内容
+         * - XmlCDATASection: 节点的内容
+         * - XmlProcessingInstruction: 返回指定内容 data
+         * - XmlComment: 注释文本
+         * - XmlDocument: null
+         * - XmlDocumentType: null
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        nodeValue: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点的根元素（XmlDocument 对象）
+         * 
+         * 
+         * @readonly
+         * @type XmlDocument
+         */
+
+        ownerDocument: XmlDocument
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 可返回某节点的父节点
+         * 
+         * 
+         * @readonly
+         * @type XmlNode
+         */
+
+        parentNode: XmlNode
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回指定节点的子节点的节点列表
+         * 
+         * 
+         * @readonly
+         * @type XmlNodeList
+         */
+
+        childNodes: XmlNodeList
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点的首个子节点
+         * 
+         * 
+         * @readonly
+         * @type XmlNode
+         */
+
+        firstChild: XmlNode
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点的最后一个子节点
+         * 
+         * 
+         * @readonly
+         * @type XmlNode
+         */
+
+        lastChild: XmlNode
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回某节点之前紧跟的节点（处于同一树层级），如果没有此节点，那么该属性返回 null
+         * 
+         * 
+         * @readonly
+         * @type XmlNode
+         */
+
+        previousSibling: XmlNode
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回某个元素之后紧跟的节点（处于同一树层级中），如果无此节点，则属性返回 null
+         * 
+         * 
+         * @readonly
+         * @type XmlNode
+         */
+
+        nextSibling: XmlNode
+
+
+
+        /**
+         * 
+         * @brief 查询是否存在子节点
+         * @return 存在任何子节点时返回 true，否则返回 false
+         * 
+         * 
+         * 
+         */
+        hasChildNodes(): boolean;
+
+        /**
+         * 
+         * @brief 合并相邻的 Text 节点并删除空的 Text 节点
+         * 
+         * 这个方法将遍历当前节点的所有子孙节点，通过删除空的 Text 节点，已经合并所有相邻的 Text 节点来规范化文档。该方法在进行节点的插入或删除操作后，对于简化文档树的结构很有用。
+         * 
+         * 
+         * 
+         */
+        normalize(): void;
+
+        /**
+         * 
+         * @brief 创建指定的节点的精确拷贝
+         * 
+         * 该方法将复制并返回调用它的节点的副本。如果传递给它的参数是 true，它还将递归复制当前节点的所有子孙节点。 否则，它只复制当前节点。返回的节点不属于文档树，它的 parentNode 属性为 null。当复制的是 Element 节点时，它的所有属性都将被复制。
+         * @param deep 是否深度拷贝，为 true 时，被克隆的节点会克隆原节点的所有子节点
+         * @return 返回所复制的节点
+         * 
+         * 
+         * 
+         */
+        cloneNode(deep?: boolean/** = true*/): XmlNode;
+
+        /**
+         * 
+         * @brief 返回在当前节点上匹配指定的命名空间 URI 的前缀
+         * @param namespaceURI 指定匹配的命名空间 URI
+         * @return 返回匹配的前缀，未匹配到返回 null
+         * 
+         * 
+         * 
+         */
+        lookupPrefix(namespaceURI: string): string;
+
+        /**
+         * 
+         * @brief 返回在当前节点上匹配指定的前缀的命名空间 URI
+         * @param prefix 指定匹配的前缀
+         * @return 返回匹配的命名空间 URI，未匹配到返回 null
+         * 
+         * 
+         * 
+         */
+        lookupNamespaceURI(prefix: string): string;
+
+        /**
+         * 
+         * @brief 在已有的子节点前插入一个新的子节点
+         * 
+         * 如果文档树中已经存在了 newChild，它将从文档树中删除，然后重新插入它的新位置。来自一个文档的节点（或由一个文档创建的节点）不能插入另一个文档。也就是说，newChild 的 ownerDocument 属性必须与当前节点的 ownerDocument 属性相同。
+         * @param newChild 插入新的节点
+         * @param refChild 在此节点前插入新节点
+         * @return 返回新的子节点
+         * 
+         * 
+         * 
+         */
+        insertBefore(newChild: XmlNode, refChild: XmlNode): XmlNode;
+
+        /**
+         * 
+         * @brief 在已有的子节点后插入一个新的子节点
+         * 
+         * 如果文档树中已经存在了 newChild，它将从文档树中删除，然后重新插入它的新位置。来自一个文档的节点（或由一个文档创建的节点）不能插入另一个文档。也就是说，newChild 的 ownerDocument 属性必须与当前节点的 ownerDocument 属性相同。
+         * @param newChild 插入新的节点
+         * @param refChild 在此节点后插入新节点
+         * @return 返回新的子节点
+         * 
+         * 
+         * 
+         */
+        insertAfter(newChild: XmlNode, refChild: XmlNode): XmlNode;
+
+        /**
+         * 
+         * @brief 向节点的子节点列表的末尾添加新的子节点
+         * 
+         * 如果文档树中已经存在了 newChild，它将从文档树中删除，然后重新插入它的新位置。来自一个文档的节点（或由一个文档创建的节点）不能插入另一个文档。也就是说，newChild 的 ownerDocument 属性必须与当前节点的 ownerDocument 属性相同。
+         * @param newChild 指定添加的节点
+         * @return 返回这个新的子节点
+         * 
+         * 
+         * 
+         */
+        appendChild(newChild: XmlNode): XmlNode;
+
+        /**
+         * 
+         * @brief 将某个子节点替换为另一个
+         * 
+         * 如果文档树中已经存在了 newChild，它将从文档树中删除，然后重新插入它的新位置。来自一个文档的节点（或由一个文档创建的节点）不能插入另一个文档。也就是说，newChild 的 ownerDocument 属性必须与当前节点的 ownerDocument 属性相同。
+         * @param newChild 指定新的节点
+         * @param oldChild 指定被替换的节点
+         * @return 如替换成功，此方法可返回被替换的节点，如替换失败，则返回 null
+         * 
+         * 
+         * 
+         */
+        replaceChild(newChild: XmlNode, oldChild: XmlNode): XmlNode;
+
+        /**
+         * 
+         * @brief 从子节点列表中删除某个节点
+         * @param oldChild 指定被删除的节点
+         * @return 如删除成功，此方法可返回被删除的节点，如失败，则返回 null
+         * 
+         * 
+         * 
+         */
+        removeChild(oldChild: XmlNode): XmlNode;
+    }
+
+    export class XmlAttr {
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 查询元素的本地名称。如果选定的节点无命名空间，则该属性等同于 nodeName
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+        localName: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 属性的值
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        value: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 属性的名称
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        name: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 查询元素的命名空间的 URI。如果选定的节点无命名空间，则该属性返回 NULL
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        namespaceURI: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 查询和设置元素的命名空间前缀。如果选定的节点无命名空间，则该属性返回 NULL
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        prefix: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 属性的名称，为兼容的目的
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        nodeName: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 属性的值，为兼容的目的
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        nodeValue: string
+    }
+
+    export class XmlCDATASection extends XmlText {
+
+    }
+
+    export class XmlDocumentType extends XmlNode {
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回 DTD 的名称
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+        name: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 可返回外部 DTD 的公共识别符
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        publicId: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 可返回外部 DTD 的系统识别符
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        systemId: string
+    }
+
+    export class XmlCharacterData extends XmlNode {
+        /**
+	 * class prop 
+	 *
+	 * 
+	 * @brief 该节点包含的文本
+	 * 
+	 * 
+	 * 
+	 * @type String
+	 */
+
+        data: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 该节点包含的字符数
+         * 
+         * 
+         * @readonly
+         * @type Integer
+         */
+
+        length: number
+
+
+
+        /**
+         * 
+         * @brief 从节点中提取子串
+         * @param offset 要返回的第一个字符的位置
+         * @param count 要返回的子串中的字符数
+         * @return 返回提取的字符串
+         * 
+         * 
+         * 
+         */
+        substringData(offset: number, count: number): string;
+
+        /**
+         * 
+         * @brief 把字符串附加到节点上
+         * @param arg 要附加到节点的字符串
+         * 
+         * 
+         * 
+         */
+        appendData(arg: string): void;
+
+        /**
+         * 
+         * @brief 把字符串插入节点
+         * @param offset 要把字符串插入节点的字符位置
+         * @param arg 要插入的字符串
+         * 
+         * 
+         * 
+         */
+        insertData(offset: number, arg: string): void;
+
+        /**
+         * 
+         * @brief 从节点删除文本
+         * @param offset 要删除的第一个字符的位置
+         * @param count 要删除的字符的数量
+         * 
+         * 
+         * 
+         */
+        deleteData(offset: number, count: number): void;
+
+        /**
+         * 
+         * @brief 用指定的字符串替换节点的字符
+         * @param offset 节点要替换的字符位置
+         * @param count 要替换的字符的数量
+         * @param arg 要插入的字符串
+         * 
+         * 
+         * 
+         */
+        replaceData(offset: number, count: number, arg: string): void;
+    }
+
+    export class XmlElement extends XmlNode {
+        /**
+	 * class prop 
+	 *
+	 * 
+	 * @brief 查询元素的命名空间的 URI。如果选定的节点无命名空间，则该属性返回 NULL
+	 * 
+	 * 
+	 * @readonly
+	 * @type String
+	 */
+
+        namespaceURI: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 查询和设置元素的命名空间前缀。如果选定的节点无命名空间，则该属性返回 NULL
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        prefix: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 查询元素的本地名称。如果选定的节点无命名空间，则该属性等同于 nodeName
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        localName: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回元素的标签名
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        tagName: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * ! 查询和设置元素的 id 属性
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        id: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * ! 查询和设置选定元素的文本。查询时，返回元素节点内所有文本节点的值；设置时，删除所有子节点，并用单个文本节点来替换它们。
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        textContent: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * ! 查询和设置选定元素的 HTML 文本，仅在 html 模式有效。查询时，返回元素节点内所有子节点的 HTML 编码；设置时，删除所有子节点，并用指定的 HTML 解码后替换它们。
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        innerHTML: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * ! 查询和设置元素的 class 属性，仅在 html 模式有效
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        className: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回包含被选节点属性的 NamedNodeMap。如果被选节点不是元素，则该属性返回 NULL。
+         * 
+         * 
+         * @readonly
+         * @type XmlNamedNodeMap
+         */
+
+        attributes: XmlNamedNodeMap
+
+
+
+        /**
+         * 
+         * @brief 通过名称查询属性的值
+         * @param name 指定查询的属性名
+         * @return 返回属性的值
+         * 
+         * 
+         * 
+         */
+        getAttribute(name: string): string;
+
+        /**
+         * 
+         * @brief 通过命名空间 URI 和名称来获取属性值
+         * @param namespaceURI 指定查询的命名空间 URI
+         * @param localName 指定查询的属性名
+         * @return 返回属性的值
+         * 
+         * 
+         * 
+         */
+        getAttributeNS(namespaceURI: string, localName: string): string;
+
+        /**
+         * 
+         * @brief 创建或改变某个新属性
+         * 
+         * 该方法把指定的属性设置为指定的值。如果不存在具有指定名称的属性，该方法将创建一个新属性
+         * @param name 指定要设置的属性名
+         * @param value 指定要设置的属性值
+         * 
+         * 
+         * 
+         */
+        setAttribute(name: string, value: string): void;
+
+        /**
+         * 
+         * @brief 创建或改变具有命名空间的属性
+         * 
+         * 该方法与 setAttribute 方法类似，只是要创建或设置的属性由命名空间 URI 和限定名（由名字空间前缀、冒号和名字空间中的本地名构成）共同指定。除了可以改变一个属性的值以外，使用该方法还可以改变属性的名字空间前缀
+         * @param namespaceURI 指定要设置的命名空间 URI
+         * @param qualifiedName 指定要设置的属性名
+         * @param value 指定要设置的属性值
+         * 
+         * 
+         * 
+         */
+        setAttributeNS(namespaceURI: string, qualifiedName: string, value: string): void;
+
+        /**
+         * 
+         * @brief 通过名称删除指定的属性
+         * @param name 指定删除的属性名
+         * 
+         * 
+         * 
+         */
+        removeAttribute(name: string): void;
+
+        /**
+         * 
+         * @brief 通过命名空间和名称删除指定的属性
+         * @param namespaceURI 指定要删除的命名空间 URI
+         * @param localName 指定删除的属性名
+         * 
+         * 
+         * 
+         */
+        removeAttributeNS(namespaceURI: string, localName: string): void;
+
+        /**
+         * 
+         * @brief 查询当前节点是否拥有指定名称的属性
+         * @param name 指定查询的属性名称
+         * @return 如果当前元素节点拥有指定属性，则返回 true，否则返回 false
+         * 
+         * 
+         * 
+         */
+        hasAttribute(name: string): boolean;
+
+        /**
+         * 
+         * @brief 查询当前节点是否拥有指定命名空间和名称的属性
+         * @param namespaceURI 指定要查询的命名空间 URI
+         * @param localName 指定查询的属性名称
+         * @return 如果当前元素节点拥有指定属性，则返回 true，否则返回 false
+         * 
+         * 
+         * 
+         */
+        hasAttributeNS(namespaceURI: string, localName: string): boolean;
+
+        /**
+         * 
+         * @brief 返回拥有指定名称的所有元素的 XmlNodeList
+         * 
+         * 该方法将遍历指定元素的子孙节点，返回一个 XmlElement 节点的 XmlNodeList 对象，表示所有具有指定标签名的文档元素。元素在返回的数组中的顺序就是它们出现在文档源代码中的顺序。
+         * 
+         * XmlDocument 接口也定义了 getElementsByTagName 方法，它与该方法相似，但遍历整个文档，而不是遍历某个元素的子孙节点。
+         * @param tagName 需检索的标签名。值 "*" 匹配所有的标签
+         * @return 节点树中具有指定标记的 XmlElement 节点的 XmlNodeList 集合。返回的元素节点的顺序就是它们在源文档中出现的顺序。
+         * 
+         * 
+         * 
+         */
+        getElementsByTagName(tagName: string): XmlNodeList;
+
+        /**
+         * 
+         * @brief 返回拥有指定命名空间和名称的所有元素的 XmlNodeList
+         * 
+         * 该方法与 getElementsByTagName 方法相似，只是想获取的元素的标记名被指定为命名空间 URI 和在命名空间中定义的本地名的组合。
+         * @param namespaceURI 指定要查询的命名空间 URI
+         * @param localName 需检索的标签名。值 "*" 匹配所有的标签
+         * @return 节点树中具有指定标记的 XmlElement 节点的 XmlNodeList 集合。返回的元素节点的顺序就是它们在源文档中出现的顺序。
+         * 
+         * 
+         * 
+         */
+        getElementsByTagNameNS(namespaceURI: string, localName: string): XmlNodeList;
+
+        /**
+         * 
+         * @brief 返回拥有指定 id 属性的元素
+         * 
+         * 该方法将遍历指定元素的子孙节点，返回一个 XmlElement 节点对象，表示第一个具有指定 id 属性的文档元素。。
+         * 
+         * XmlDocument 接口也定义了 getElementsByTagName 方法，它与该方法相似，但遍历整个文档，而不是遍历某个元素的子孙节点。
+         * @param id 需检索的 id
+         * @return 节点树中具有指定 id 属性的 XmlElement 节点
+         * 
+         * 
+         * 
+         */
+        getElementById(id: string): XmlElement;
+
+        /**
+         * 
+         * @brief 返回带有指定 class 名称的所有元素的一个节点列表
+         * 
+         * 该方法将返回一个 XmlNodeList 对象（可以作为只读数组处理），该对象存放文档中具有指定 class 名的所有 XmlElement 节点，它们存放的顺序就是在源文档中出现的顺序。 XmlNodeList 对象是“活”的，即如果在文档中添加或删除了指定标签名的元素，它的内容会自动进行必要的更新。
+         * @param className 需检索的 class 名称
+         * @return 文档树中具有指定 class 名的 XmlElement 节点的 XmlNodeList 集合。返回的元素节点的顺序就是它们在源文档中出现的顺序。
+         * 
+         * 
+         * 
+         */
+        getElementsByClassName(className: string): XmlNodeList;
+    }
+
+    export class XmlNamedNodeMap {
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回属性列表中的属性数目
+         * 
+         * 
+         * @readonly
+         * @type Integer
+         */
+        length: number
+
+        /**
+         * 
+         * @brief 返回属性列表中处于指定的索引号的属性
+         * @param index 指定要查询的索引
+         * @return 指定索引号的属性
+         * 
+         * 
+         * 
+         */
+        item(index: number): XmlAttr;
+
+        /**
+         * 
+         * @brief 查询指定名称的属性
+         * @param name 指定要查询的名称
+         * @return 返回查询出的属性
+         * 
+         * 
+         * 
+         */
+        getNamedItem(name: string): XmlAttr;
+    }
+
+    export class XmlText extends XmlCharacterData {
+        /**
+         * 
+         * @brief 按照指定的 offset 把文本节点分割为两个节点
+         * 
+         * 该方法将在指定的 offset 处把 XmlText 节点分割成两个节点。原始的 XmlText 节点将被修改，使它包含 offset 指定的位置之前的文本内容（但不包括文本内容）。新的 XmlText 节点将被创建，用于存放从 offset 位置（包括该位置上的字符）到原字符结尾的所有字符。新的 XmlText 节点是该方法的返回值。此外，如果原始的 XmlText 节点具有 parentNode，新的 XmlText 节点将插入这个父节点，紧邻在原始节点之后。
+         * 
+         * XmlCDATASection 接口继承了 XmlText 接口， XmlCDATASection 节点也可以使用该方法 ，只是新创建的节点是 XmlCDATASection 节点，而不是 XmlText 节点。
+         * @param offset 规定在何处分割文本节点。开始值以 0 开始
+         * @return 从当前节点分割出的 Text 节点
+         * 
+         * 
+         * 
+         */
+        splitText(offset: number): XmlText;
+    }
+
+    export class XmlProcessingInstruction extends XmlNode {
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回此处理指令的目标
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+        target: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 设置或返回此处理指令的内容
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        data: string
+    }
+
+    export class XmlNodeList {
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回节点列表中的节点数目
+         * 
+         * 
+         * @readonly
+         * @type Integer
+         */
+        length: number
+
+
+        /**
+         * 
+         * @brief 返回节点列表中处于指定的索引号的节点
+         * @param index 指定要查询的索引
+         * @return 指定索引号的节点
+         * 
+         * 
+         * 
+         */
+        item(index: number): XmlNode;
+
+    }
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlElement 对象
+     * 
+     * 
+     * 
+     */
+    export const ELEMENT_NODE = 1;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlAttr 对象
+     * 
+     * 
+     * 
+     */
+    export const ATTRIBUTE_NODE = 2;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlText 对象
+     * 
+     * 
+     * 
+     */
+    export const TEXT_NODE = 3;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlCDATASection 对象
+     * 
+     * 
+     * 
+     */
+    export const CDATA_SECTION_NODE = 4;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlProcessingInstruction 对象
+     * 
+     * 
+     * 
+     */
+    export const PROCESSING_INSTRUCTION_NODE = 7;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlComment 对象
+     * 
+     * 
+     * 
+     */
+    export const COMMENT_NODE = 8;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlDocument 对象
+     * 
+     * 
+     * 
+     */
+    export const DOCUMENT_NODE = 9;
+
+    /**
+     * 
+     * @brief XmlNode 的 nodeType 属性常量，表示节点为 XmlDocumentType 对象
+     * 
+     * 
+     * 
+     */
+    export const DOCUMENT_TYPE_NODE = 10;
+
+    export class XmlDocument extends XmlNode {
+        /**
+	 * class prop 
+	 *
+	 * 
+	 * @brief 返回用于文档的编码（在解析时）
+	 * 
+	 * 
+	 * @readonly
+	 * @type String
+	 */
+
+        inputEncoding: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 设置或返回文档是否为 standalone
+         * 
+         * 
+         * 
+         * @type Boolean
+         */
+
+        xmlStandalone: boolean
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 设置或返回文档的 XML 版本
+         * 
+         * 
+         * 
+         * @type String
+         */
+
+        xmlVersion: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回与文档相关的文档类型声明（Document Type Declaration）
+         * 
+         * 对于没有 DTD 的 XML 文档，则返回 null。此属性可提供对 XmlDocumentType 对象（ XmlDocument 的一个子节点）的直接访问。
+         * 
+         * 
+         * @readonly
+         * @type XmlDocumentType
+         */
+
+        doctype: XmlDocumentType
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回文档的根节点
+         * 
+         * 
+         * @readonly
+         * @type XmlElement
+         */
+
+        documentElement: XmlElement
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回 HTML 文档的 head 节点，仅在 html 模式有效
+         * 
+         * 
+         * @readonly
+         * @type XmlElement
+         */
+
+        head: XmlElement
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回 HTML 文档的 title 节点的内容，仅在 html 模式有效
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
+
+        title: string
+
+        /**
+         * class prop 
+         *
+         * 
+         * @brief 返回 HTML 文档的 body 节点，仅在 html 模式有效
+         * 
+         * 
+         * @readonly
+         * @type XmlElement
+         */
+
+        body: XmlElement
+
+
+
+        /**
+         * 
+         * @brief 构造一个 XmlDocument 对象
+         * @param type 指定文档对象的类型，缺省为 "text/xml"，若需要处理 html 则需要指定 "text/html"
+         * 
+         * 
+         * 
+         */
+        constructor(type?: string/** = "text/xml"*/);
+
+        /**
+         * 
+         * @brief 通过解析一个 XML/HTML 字符串来组成该文档，不支持多语种
+         * @param source 要解析的 XML/HTML 文本，取决于文档创建时的类型
+         * 
+         * 
+         * 
+         */
+        load(source: string): void;
+
+        /**
+         * 
+         * @brief 通过解析一个二进制 XML/HTML 字符串来组成该文档，并根据语种自动转换
+         * @param source 要解析的 XML/HTML 文本，取决于文档创建时的类型
+         * 
+         * 
+         * 
+         */
+        load(source: Buffer): void;
+
+        /**
+         * 
+         * @brief 返回带有指定名称的所有元素的一个节点列表
+         * 
+         * 该方法将返回一个 XmlNodeList 对象（可以作为只读数组处理），该对象存放文档中具有指定标签名的所有 XmlElement 节点，它们存放的顺序就是在源文档中出现的顺序。 XmlNodeList 对象是“活”的，即如果在文档中添加或删除了指定标签名的元素，它的内容会自动进行必要的更新。
+         * @param tagName 需检索的标签名。值 "*" 匹配所有的标签
+         * @return 文档树中具有指定标记的 XmlElement 节点的 XmlNodeList 集合。返回的元素节点的顺序就是它们在源文档中出现的顺序。
+         * 
+         * 
+         * 
+         */
+        getElementsByTagName(tagName: string): XmlNodeList;
+
+        /**
+         * 
+         * @brief 返回带有指定命名空间和名称的所有元素的一个节点列表
+         * 
+         * 该方法与 getElementsByTagName() 方法相似，只是它根据命名空间和名称来检索元素。
+         * @param namespaceURI 指定检索的命名空间 URI。值 "*" 可匹配所有的标签
+         * @param localName 需检索的标签名。值 "*" 匹配所有的标签
+         * @return 文档树中具有指定标记的 XmlElement 节点的 XmlNodeList 集合。返回的元素节点的顺序就是它们在源文档中出现的顺序。
+         * 
+         * 
+         * 
+         */
+        getElementsByTagNameNS(namespaceURI: string, localName: string): XmlNodeList;
+
+        /**
+         * 
+         * @brief 返回拥有指定 id 属性的元素
+         * 
+         * 该方法将遍历文档的子孙节点，返回一个 XmlElement 节点对象，表示第一个具有指定 id 属性的文档元素。。
+         * @param id 需检索的 id
+         * @return 节点树中具有指定 id 属性的 XmlElement 节点
+         * 
+         * 
+         * 
+         */
+        getElementById(id: string): XmlElement;
+
+        /**
+         * 
+         * @brief 返回带有指定 class 名称的所有元素的一个节点列表
+         * 
+         * 该方法将返回一个 XmlNodeList 对象（可以作为只读数组处理），该对象存放文档中具有指定 class 名的所有 XmlElement 节点，它们存放的顺序就是在源文档中出现的顺序。 XmlNodeList 对象是“活”的，即如果在文档中添加或删除了指定标签名的元素，它的内容会自动进行必要的更新。
+         * @param className 需检索的 class 名称
+         * @return 文档树中具有指定 class 名的 XmlElement 节点的 XmlNodeList 集合。返回的元素节点的顺序就是它们在源文档中出现的顺序。
+         * 
+         * 
+         * 
+         */
+        getElementsByClassName(className: string): XmlNodeList;
+
+        /**
+         * 
+         * @brief 创建元素节点
+         * @param tagName 指定元素节点规定名称
+         * @return 返回新创建的 XmlElement 节点，具有指定的标签名
+         * 
+         * 
+         * 
+         */
+        createElement(tagName: string): XmlElement;
+
+        /**
+         * 
+         * @brief 创建带有指定命名空间的元素节点
+         * @param namespaceURI 指定元素节点命名空间 URI
+         * @param qualifiedName 指定元素节点规定名称
+         * @return 返回新创建的 XmlElement 节点，具有指定的标签名
+         * 
+         * 
+         * 
+         */
+        createElementNS(namespaceURI: string, qualifiedName: string): XmlElement;
+
+        /**
+         * 
+         * @brief 创建文本节点
+         * @param data 指定此节点的文本
+         * @return 返回新创建的 XmlText 节点，表示指定的 data 字符串
+         * 
+         * 
+         * 
+         */
+        createTextNode(data: string): XmlText;
+
+        /**
+         * 
+         * @brief 创建注释节点
+         * @param data 指定此节点的注释文本
+         * @return 返回新创建的 XmlComment 节点，注释文本为指定的 data
+         * 
+         * 
+         * 
+         */
+        createComment(data: string): XmlComment;
+
+        /**
+         * 
+         * @brief 创建 XmlCDATASection 节点
+         * @param data 指定此节点规定 CDATA 数据
+         * @return 返回新创建的 XmlCDATASection 节点，内容为指定的 data
+         * 
+         * 
+         * 
+         */
+        createCDATASection(data: string): XmlCDATASection;
+
+        /**
+         * 
+         * @brief 创建 XmlProcessingInstruction 节点
+         * @param target 指定处理指令的目标
+         * @param data 指定处理指令的内容文本
+         * @return 新创建的 ProcessingInstruction 节点
+         * 
+         * 
+         * 
+         */
+        createProcessingInstruction(target: string, data: string): XmlProcessingInstruction;
+
+    }
+
+    export class XmlComment extends XmlCharacterData {
+
+    }
+
+    /**
+     * 
+     * @brief xml 文档对象，参见 XmlDocument 对象
+     * 
+     * 
+     */
+    export var Document: XmlDocument;
+
+
+    /**
+     * 
+     * @brief 解析 xml/html 文本，并创建 XmlDocument 对象，不支持多语种
+     * @param source 指定需要解析的 xml/html 文本
+     * @param type 指定文本类型，缺省为 text/xml，也可指定为 text/html
+     * @return 返回创建的 XmlDocument 对象
+     * 
+     * 
+     * 
+     */
+    export function parse(source: string, type?: string/** = "text/xml"*/): XmlDocument;
+
+    /**
+     * 
+     * @brief 解析 xml/html，并创建 XmlDocument 对象，解析时会根据指定的语种转换
+     * @param source 指定需要解析的 xml/html 二进制数据
+     * @param type 指定文本类型，缺省为 text/xml，也可指定为 text/html
+     * @return 返回创建的 XmlDocument 对象
+     * 
+     * 
+     * 
+     */
+    export function parse(source: Buffer, type?: string/** = "text/xml"*/): XmlDocument;
+
+    /**
+     * 
+     * @brief 序列化 XmlNode 为字符串
+     * @param node 指定需要序列化的 XmlNode
+     * @return 返回序列化的字符串
+     * 
+     * 
+     * 
+     */
+    export function serialize(node: XmlNode): string;
+
 }
 //#endregion
