@@ -8,5 +8,7 @@
   },
   "author": "544430497@qq.com",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  }
 }
