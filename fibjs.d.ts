@@ -46,6 +46,25 @@ type Integer = number;
 type Value = any;
 type Long = number;
 
+interface Error {
+    stack?: string;
+}
+
+// Declare "static" methods in Error
+interface ErrorConstructor {
+    /** Create .stack property on a target object */
+    captureStackTrace(targetObject: Object, constructorOpt?: Function): void;
+
+    /**
+     * Optional override for formatting stack traces
+     *
+     * @see https://github.com/v8/v8/wiki/Stack%20Trace%20API#customizing-stack-traces
+     */
+    prepareStackTrace?: (err: Error, stackTraces: NodeJS.CallSite[]) => any;
+
+    stackTraceLimit: number;
+}
+
 //#endregion
 
 //#region===================================================assert========================================================
@@ -647,7 +666,7 @@ declare module "test" {
      * @export
      * @param {number} log 指定进行测试时的日志输出级别，ERROR 时，项目报错信息集中在报告后显示，低于 ERROR 时，输出信息随时显示，高于 ERROR 时，只显示报告
      */
-    export function run(log: number);
+    export function run(log?: number);
 
     /**
      *初始化当前脚本的测试环境，将 test 模块方法复制为当前脚本全局变量
@@ -12645,18 +12664,17 @@ declare module "xml" {
      */
     export const DOCUMENT_TYPE_NODE = 10;
 
-    export class XmlDocument extends XmlNode {
+    class XmlDocument extends XmlNode {
         /**
-	 * class prop 
-	 *
-	 * 
-	 * @brief 返回用于文档的编码（在解析时）
-	 * 
-	 * 
-	 * @readonly
-	 * @type String
-	 */
-
+         * class prop 
+         *
+         * 
+         * @brief 返回用于文档的编码（在解析时）
+         * 
+         * 
+         * @readonly
+         * @type String
+         */
         inputEncoding: string
 
         /**
@@ -12917,7 +12935,7 @@ declare module "xml" {
      * 
      * 
      */
-    export var Document: XmlDocument;
+    export var Document: typeof XmlDocument;
 
 
     /**

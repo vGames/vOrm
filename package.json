@@ -9,6 +9,8 @@
   "author": "544430497@qq.com",
   "license": "MIT",
   "devDependencies": {
+    "@types/long": "^4.0.0",
+    "long": "^4.0.0",
     "typescript": "^2.9.2"
   }
 }

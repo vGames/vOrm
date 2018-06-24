@@ -7,6 +7,7 @@
 
 import * as test from "test";
 import { sqlInsert, Mapper } from "../src/Annotation/Annotation";
+import { XMLConfigBuilder } from "../src/Builder/XMLConfigBuilder";
 
 class User {
     name: string;
@@ -22,6 +23,7 @@ class UserDao {
     }
 }
 
+test.setup();
 test.describe("Mapper", () => {
     test.it("register", () => {
 
@@ -34,3 +36,12 @@ test.describe("MapperAnnotationBuilder", () => {
         new UserDao();
     });
 })
+
+test.describe("XMLConfigBuilder", () => {
+    test.it("parser", () => {
+        let builder = new XMLConfigBuilder("../cfg/cfg.xml");
+        builder.parse();
+    })
+})
+
+process.exit(test.run(console.INFO));
