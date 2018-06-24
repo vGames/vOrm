@@ -2,7 +2,7 @@
 <!--cfg配置-->
 <configuration>
     <!-- 数据源 type pooled 连接池 type unpooled 用的时候打开连接,用完之后关闭连接 class 第三方数据源,必须实现IDataSourceFactory -->
-    <dataSource type="pooled" class="">
+    <dataSource type="unpooled" class="">
         <!-- 数据库引擎 -->
         <property name="engine" value="mysql"/>
 

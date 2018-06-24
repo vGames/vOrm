@@ -9,7 +9,6 @@
 import { ISqlSessionFactory } from "../IFace/ISqlSessionFactory";
 import { SqlSession } from "./SqlSession";
 import { Configuration } from "./Configuration";
-import * as path from "path";
 import { XMLConfigBuilder } from "../../Builder/XMLConfigBuilder";
 
 export class SqlSessionFactory implements ISqlSessionFactory {
@@ -18,7 +17,7 @@ export class SqlSessionFactory implements ISqlSessionFactory {
     public constructor(cfg: string);
     public constructor(cfg: Configuration | string) {
         if (typeof cfg == "string") {
-            if(cfg.endsWith("xml")){
+            if (cfg.endsWith("xml")) {
                 const parser = new XMLConfigBuilder(cfg as string);
             }
         }

@@ -2,10 +2,11 @@
  * @Author: 544430497@qq.com 
  * @Date: 2018-06-24 10:30:27 
  * @Last Modified by: 544430497@qq.com
- * @Last Modified time: 2018-06-24 15:22:24
+ * @Last Modified time: 2018-06-24 21:56:29
  */
 import { Configuration } from "../Session/Impl/Configuration";
 import { TypeAliasRegistry } from "../Type/TypeAliasRegistry";
+import { XmlElement } from "xml";
 
 export abstract class BaseBuilder {
     protected configuration: Configuration;

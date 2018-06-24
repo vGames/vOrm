@@ -2,7 +2,7 @@
  * @Author: 544430497@qq.com 
  * @Date: 2018-06-18 21:06:41 
  * @Last Modified by: 544430497@qq.com
- * @Last Modified time: 2018-06-24 10:32:36
+ * @Last Modified time: 2018-06-24 21:34:01
  */
 import { DataSourceType } from "../../DataSource/Impl/DataSourceType";
 import { MapperRegistry } from "../../Mapper/MapperRegistry";
@@ -13,7 +13,7 @@ import { UnpooledDataSourceFactory } from "../../DataSource/Impl/UnPooled/Unpool
 export class Configuration {
     public dataSourceType: DataSourceType;
     protected mapperRegistry: MapperRegistry;
-    protected typeAliasRegistry:TypeAliasRegistry;
+    protected typeAliasRegistry: TypeAliasRegistry;
 
     public constructor() {
         this.typeAliasRegistry = new TypeAliasRegistry();
@@ -27,7 +27,7 @@ export class Configuration {
         return this.mapperRegistry;
     }
 
-    public getTypeAliasRegistry():TypeAliasRegistry{
+    public getTypeAliasRegistry(): TypeAliasRegistry {
         return this.typeAliasRegistry;
     }
 }
