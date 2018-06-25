@@ -31,7 +31,7 @@ export interface IConnection{
      *   函数运行错误，事务自动回滚
      * 
      */
-    transition(func:Function):boolean;
+    trans(func:Function):boolean;
 
     /**
      * 提交当前数据库连接上的事务

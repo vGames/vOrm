@@ -16,7 +16,7 @@ export class UnpooledDataSourceFactory implements IDataSourceFactory {
     }
 
     public setProperties(value: Map<string, string>): void {
-        console.log("value");
+        
         // throw new Error("Method not implemented.");
     }
 
