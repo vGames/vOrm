@@ -6,7 +6,6 @@
  */
 import { Configuration } from "../Session/Impl/Configuration";
 import { TypeAliasRegistry } from "../Type/TypeAliasRegistry";
-import { XmlElement } from "xml";
 
 export abstract class BaseBuilder {
     protected configuration: Configuration;

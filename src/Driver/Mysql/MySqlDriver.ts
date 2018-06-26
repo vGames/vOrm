@@ -2,13 +2,14 @@
  * @Author: 544430497@qq.com 
  * @Date: 2018-06-26 08:30:48 
  * @Last Modified by: 544430497@qq.com
- * @Last Modified time: 2018-06-26 09:31:11
+ * @Last Modified time: 2018-06-27 00:11:33
  */
-import { IDriver, DriverParameter } from "../IFace/IDriver";
+import { IDriver } from "../IFace/IDriver";
 import { IConnection } from "../../DataSource/IFace/IConnection";
 import * as db from "db";
+import { Driver } from "../Driver";
 
-export class MySqlDriver<T = "mysql"> implements IDriver<T> {
+export class MySqlDriver<T = "mysql"> extends Driver<T> implements IDriver<T> {
 
     /**
      *
@@ -17,46 +18,6 @@ export class MySqlDriver<T = "mysql"> implements IDriver<T> {
      * @memberof MySqlDriver
      */
     public name: string = "mysql";
-
-    /**
-     *
-     *
-     * @private
-     * @type {IMySqlParameter}
-     * @memberof MySqlDriver
-     */
-    private _parameters: DriverParameter<T>;
-
-    /**
-     *
-     *
-     * @template T
-     * @returns {DriverParameter<T>}
-     * @memberof MySqlDriver
-     */
-    public get parameters(): DriverParameter<T> {
-        return this._parameters as DriverParameter<T>;
-    }
-
-    /**
-     *
-     *
-     * @memberof MySqlDriver
-     */
-    public set parameters(param: DriverParameter<T>) {
-        this._parameters = param;
-    }
-
-    /**
-     *
-     *
-     * @param {string} name
-     * @returns {string}
-     * @memberof MySqlDriver
-     */
-    public getParameter(name: string): string {
-        return this.parameters[name];
-    }
 
     /**
      *
@@ -78,14 +39,5 @@ export class MySqlDriver<T = "mysql"> implements IDriver<T> {
      */
     public open(): IConnection {
         return db.openMySQL(this.url);
-    }
-
-    /**
-     *
-     *
-     * @memberof MySqlDriver
-     */
-    public close(conn: IConnection): void {
-        conn.close();
     }
 }

@@ -2,7 +2,7 @@
  * @Author: 544430497@qq.com 
  * @Date: 2018-06-26 08:28:30 
  * @Last Modified by: 544430497@qq.com
- * @Last Modified time: 2018-06-26 09:29:04
+ * @Last Modified time: 2018-06-27 00:04:14
  */
 import { IConnection } from "../../DataSource/IFace/IConnection";
 import { IMySqlParameter } from "./IMySqlParameter";

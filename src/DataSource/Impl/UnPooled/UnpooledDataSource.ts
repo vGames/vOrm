@@ -2,11 +2,12 @@
  * @Author: wang.hanbin@uqee.com 
  * @Date: 2018-06-21 08:44:53 
  * @Last Modified by: 544430497@qq.com
- * @Last Modified time: 2018-06-26 09:22:53
+ * @Last Modified time: 2018-06-27 00:13:23
  */
 import { IDataSource } from "../../IFace/IDataSource";
 import { IConnection } from "../../IFace/IConnection";
 import { IDriver, Driver } from "../../../Driver/IFace/IDriver";
+import { MySqlDriver } from "../../../Driver/Mysql/MySqlDriver";
 
 export class UnpooledDataSource implements IDataSource {
 
@@ -16,7 +17,16 @@ export class UnpooledDataSource implements IDataSource {
      * @type {IDriver<keyof Driver>}
      * @memberof UnpooledDataSource
      */
-    public driver: IDriver<keyof Driver>;
+    private _driver: IDriver<keyof Driver>;
+    public set dirver(name: string) {
+        switch (name) {
+            case "mysql": this._driver = MySqlDriver.fromDriver<"mysql">(); break;
+            default: throw "not implements";
+        }
+    }
+    public get driver(): IDriver<keyof Driver> {
+        return this._driver;
+    }
 
     /**
      *
@@ -35,14 +45,6 @@ export class UnpooledDataSource implements IDataSource {
      */
     protected getUrl(): string {
         return this.driver.url;
-    }
-
-    /**
-     *Creates an instance of UnpooledDataSource.
-     * @memberof UnpooledDataSource
-     */
-    public constructor() {
-
     }
 
     /**
