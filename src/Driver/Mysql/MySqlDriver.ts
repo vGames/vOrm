@@ -55,7 +55,7 @@ export class MySqlDriver<T = "mysql"> implements IDriver<T> {
      * @memberof MySqlDriver
      */
     public getParameter(name: string): string {
-        return null;
+        return this.parameters[name];
     }
 
     /**

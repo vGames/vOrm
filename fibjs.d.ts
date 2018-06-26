@@ -4375,18 +4375,15 @@ declare module "db" {
 
     interface DbConnection {
         /**
- * class prop 
- *
- * 
- * @brief 查询当前连接数据库类型
- * 
- * @readonly
- * @type String
- */
-
+         * class prop 
+         *
+         * 
+         * @brief 查询当前连接数据库类型
+         * 
+         * @readonly
+         * @type String
+         */
         type: Readonly<string>
-
-
 
         /**
          * 
@@ -4465,15 +4462,14 @@ declare module "db" {
 
     interface MySQL extends DbConnection {
         /**
-	 * class prop 
-	 *
-	 * 
-	 * @brief 数据库连接接收缓存尺寸
-	 * 
-	 * 
-	 * @type Integer
-	 */
-
+         * class prop 
+         *
+         * 
+         * @brief 数据库连接接收缓存尺寸
+         * 
+         * 
+         * @type Integer
+         */
         rxBufferSize: number
 
         /**
@@ -4538,9 +4534,7 @@ declare module "db" {
          */
 
         timeout: number
-
-
-
+        
         /**
          * 
          * @brief 备份当前数据库到新文件
