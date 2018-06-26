@@ -1,35 +1,72 @@
 /*
  * @Author: wang.hanbin@uqee.com 
  * @Date: 2018-06-21 08:44:53 
- * @Last Modified by: wang.hanbin@uqee.com
- * @Last Modified time: 2018-06-21 08:45:44
+ * @Last Modified by: 544430497@qq.com
+ * @Last Modified time: 2018-06-26 09:22:53
  */
-import { IDataSource, DB_ENGINE } from "../../IFace/IDataSource";
+import { IDataSource } from "../../IFace/IDataSource";
 import { IConnection } from "../../IFace/IConnection";
-import * as db from "db";
+import { IDriver, Driver } from "../../../Driver/IFace/IDriver";
 
 export class UnpooledDataSource implements IDataSource {
-    public engine: DB_ENGINE;
-    public user: string;
-    public pwd: string;
-    public host: string;
-    public port: string;
-    public db: string;
-    public autoCommi:boolean;
 
+    /**
+     *
+     *
+     * @type {IDriver<keyof Driver>}
+     * @memberof UnpooledDataSource
+     */
+    public driver: IDriver<keyof Driver>;
+
+    /**
+     *
+     *
+     * @type {boolean}
+     * @memberof UnpooledDataSource
+     */
+    public autoCommit: boolean;
+
+    /**
+     *
+     *
+     * @protected
+     * @returns {string}
+     * @memberof UnpooledDataSource
+     */
     protected getUrl(): string {
-        return `${this.engine}://${this.user}:${this.pwd}\@${this.host}:${this.port}/${this.db}`
+        return this.driver.url;
     }
 
+    /**
+     *Creates an instance of UnpooledDataSource.
+     * @memberof UnpooledDataSource
+     */
     public constructor() {
-        this.port = "3306";
+
     }
 
-    public getCurrection(u: string = this.user, p: string = this.pwd): IConnection {
+    /**
+     *
+     *
+     * @param {string} [u=this.driver.parameters.user]
+     * @param {string} [p=this.driver.parameters.pwd]
+     * @returns {IConnection}
+     * @memberof UnpooledDataSource
+     */
+    public getCurrection(u: string = this.driver.parameters.user, p: string = this.driver.parameters.pwd): IConnection {
         return this.doGetConnection(u, p);
     }
 
+    /**
+     *
+     *
+     * @private
+     * @param {string} u
+     * @param {string} p
+     * @returns {IConnection}
+     * @memberof UnpooledDataSource
+     */
     private doGetConnection(u: string, p: string): IConnection {
-        return db.openMySQL(this.getUrl());
+        return this.driver.open();
     }
 }

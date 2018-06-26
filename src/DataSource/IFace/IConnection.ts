@@ -2,7 +2,7 @@
  * @Author: 544430497@qq.com 
  * @Date: 2018-06-20 23:20:30 
  * @Last Modified by: 544430497@qq.com
- * @Last Modified time: 2018-06-20 23:29:58
+ * @Last Modified time: 2018-06-26 09:28:37
  */
 
 export interface IConnection{
@@ -42,4 +42,11 @@ export interface IConnection{
      * 回滚当前数据库连接上的事务
      */
     rollback():void;
+
+    /**
+     *
+     *
+     * @memberof IConnection
+     */
+    close():void;
 }
