@@ -6,7 +6,7 @@
  */
 import { IDataSource } from "../../IFace/IDataSource";
 import { IConnection } from "../../IFace/IConnection";
-import { IDriver, Driver } from "../../../Driver/IFace/IDriver";
+import { IDriver, Driver, MYSQL } from "../../../Driver/IFace/IDriver";
 import { MySqlDriver } from "../../../Driver/Mysql/MySqlDriver";
 
 export class UnpooledDataSource implements IDataSource {
@@ -19,9 +19,13 @@ export class UnpooledDataSource implements IDataSource {
      */
     private _driver: IDriver<keyof Driver>;
     public set dirver(name: string) {
-        switch (name) {
-            case "mysql": this._driver = MySqlDriver.fromDriver<"mysql">(); break;
-            default: throw "not implements";
+        if (typeof name != "string") {
+            this._driver = name;
+        } else {
+            switch (name) {
+                case "mysql": this._driver = MySqlDriver.fromDriver<MYSQL>(); break;
+                default: throw "not implements";
+            }
         }
     }
     public get driver(): IDriver<keyof Driver> {

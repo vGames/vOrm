@@ -7,11 +7,11 @@
 import { IConnection } from "../../DataSource/IFace/IConnection";
 import { IMySqlParameter } from "./IMySqlParameter";
 import { MySqlDriver } from "../Mysql/MySqlDriver";
-
+export type MYSQL = "mysql";
 export interface Driver {
-    "mysql": MySqlDriver<"mysql">
+    MYSQL: MySqlDriver<MYSQL>
 }
-export type DriverParameter<T> = T extends "mysql" ? IMySqlParameter : IMySqlParameter;
+export type DriverParameter<T> = T extends MYSQL ? IMySqlParameter : IMySqlParameter;
 export interface IDriver<T> {
 
     /**

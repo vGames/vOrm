@@ -24,7 +24,7 @@ export class Driver<T> implements IDriver<T>{
     /**
      * 
      */
-    public constructor() {
+    protected constructor() {
         this._parameters = Object.create(null) as DriverParameter<T>;
     }
 

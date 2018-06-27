@@ -7,6 +7,7 @@
 import { IDataSource } from "../../IFace/IDataSource";
 import { IConnection } from "../../IFace/IConnection";
 export class PooledDataSource implements IDataSource {
+    driver;
     
     public getCurrection():IConnection{
         return

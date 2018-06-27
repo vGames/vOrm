@@ -4,12 +4,20 @@
  * @Last Modified by: 544430497@qq.com
  * @Last Modified time: 2018-06-27 00:11:33
  */
-import { IDriver } from "../IFace/IDriver";
+import { IDriver, MYSQL } from "../IFace/IDriver";
 import { IConnection } from "../../DataSource/IFace/IConnection";
 import * as db from "db";
 import { Driver } from "../Driver";
 
-export class MySqlDriver<T = "mysql"> extends Driver<T> implements IDriver<T> {
+export class MySqlDriver<T = MYSQL> extends Driver<T> implements IDriver<T> {
+
+    /**
+     *Creates an instance of MySqlDriver.
+     * @memberof MySqlDriver
+     */
+    private constructor() {
+        super();
+    }
 
     /**
      *
